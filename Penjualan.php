@@ -1,15 +1,8 @@
 <?php
-// Commit 1 – Setup Awal
-// POLGAN MART --
-
-echo "-- POLGAN MART --<br><br>";
-
-
-
-// Commit 2 – Logika Pembelian (Versi Tabel)
+// Commit 4 – Output Akhir (Versi Benar & Rapi)
 
 // Array data barang
-$nama_barang = ["leptop", "printer", "keyboard", "mose", "flasdisk"];
+$nama_barang = ["Leptop", "Printer", "Keyboard", "Mouse", "Flasdisk"];
 $harga_barang = [15000, 10000, 12000, 20000, 25000];
 
 // Array untuk data pembelian
@@ -28,24 +21,46 @@ for ($i = 0; $i < 5; $i++) {
 }
 
 // ===============================
+// PERHITUNGAN TOTAL TAMBAHAN
+// ===============================
+$rata_rata = $grandtotal / count($total);
+$max_total = max($total);
+$min_total = min($total);
+
+// ===============================
 // OUTPUT DALAM BENTUK TABEL
 // ===============================
-echo "<h2>Data Pembelian</h2>";
-echo "<table border='1' cellpadding='8' cellspacing='0'>";
-echo "<tr>
+echo "<h2 style='text-align:center;'>POLGAN MART🛒</h2>";
+echo "<table border='1' cellpadding='8' cellspacing='0' width='70%' align='center' style='border-collapse:collapse;'>";
+
+// Header tabel
+echo "<tr style='background:#f0f0f0; text-align:center;'>
         <th>No</th>
         <th>Nama Barang</th>
         <th>Jumlah</th>
-        <th> Harga (Rp)</th>
+        <th>Total Harga</th>
       </tr>";
 
+// Isi tabel
 for ($i = 0; $i < count($beli); $i++) {
-    echo "<tr>";
-    echo "<td>" . ($i+1) . "</td>";
-    echo "<td>" . $beli[$i] . "</td>";
-    echo "<td>" . $jumlah[$i] . "</td>";
-    echo "<td>Rp " . number_format($total[$i], 0, ',', '.') . "</td>";
-    echo "</tr>";
-
-    for ($i = 0; $i < count($beli); $i++) { echo "<tr>"; echo "<td>" . ($i + 1) . "</td>"; echo "<td>" . $beli[$i] . "</td>"; echo "<td>" . $jumlah[$i] . "</td>"; echo "<td>Rp " . number_format($total[$i], 0, ',', '.') . "</td>"; echo "</tr>"; } echo "<tr> <td colspan='3' align='right'><b>Grand Total</b></td> <td><b>Rp " . number_format($grandtotal, 0, ',', '.') . "</b></td> </tr>"; echo "</table>";
+    echo "<tr align='center'>
+            <td>" . ($i + 1) . "</td>
+            <td>" . $beli[$i] . "</td>
+            <td>" . $jumlah[$i] . "</td>
+            <td>Rp " . number_format($total[$i], 0, ',', '.') . "</td>
+          </tr>";
 }
+
+// Garis pemisah
+echo "<tr><td colspan='4'><hr></td></tr>";
+
+// Baris grand total
+echo "<tr style='background:#e0e0e0; font-weight:bold;'>
+        <td colspan='3' align='right'>Grand Total</td>
+        <td>Rp " . number_format($grandtotal, 0, ',', '.') . "</td>
+      </tr>";
+
+echo "</table>";
+
+
+?>
