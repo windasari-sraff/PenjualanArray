@@ -1,11 +1,13 @@
 <?php
-// Commit 4 – Output Akhir (Versi Benar & Rapi)
+// Commit 4 – Output Akhir (Versi Benar & Rapi + Kode Barang)
 
 // Array data barang
+$kode_barang = ["BRG001", "BRG002", "BRG003", "BRG004", "BRG005"];
 $nama_barang = ["Leptop", "Printer", "Keyboard", "Mouse", "Flasdisk"];
 $harga_barang = [15000, 10000, 12000, 20000, 25000];
 
 // Array untuk data pembelian
+$kode = [];       // Menyimpan kode barang dibeli
 $beli = [];       // Menyimpan nama barang dibeli
 $jumlah = [];     // Menyimpan jumlah barang yang dibeli
 $total = [];      // Menyimpan total harga per barang
@@ -14,6 +16,7 @@ $grandtotal = 0;  // Menyimpan total semua pembelian
 // Perulangan untuk proses pembelian acak sebanyak 5 produk
 for ($i = 0; $i < 5; $i++) {
     $index = rand(0, count($nama_barang) - 1); // Pilih barang acak
+    $kode[$i] = $kode_barang[$index];
     $beli[$i] = $nama_barang[$index];
     $jumlah[$i] = rand(1, 5); // Jumlah acak 1–5
     $total[$i] = $harga_barang[$index] * $jumlah[$i];
@@ -31,11 +34,12 @@ $min_total = min($total);
 // OUTPUT DALAM BENTUK TABEL
 // ===============================
 echo "<h2 style='text-align:center;'>POLGAN MART🛒</h2>";
-echo "<table border='1' cellpadding='8' cellspacing='0' width='70%' align='center' style='border-collapse:collapse;'>";
+echo "<table border='1' cellpadding='8' cellspacing='0' width='80%' align='center' style='border-collapse:collapse;'>";
 
 // Header tabel
 echo "<tr style='background:#f0f0f0; text-align:center;'>
         <th>No</th>
+        <th>Kode Barang</th>
         <th>Nama Barang</th>
         <th>Jumlah</th>
         <th>Total Harga</th>
@@ -45,6 +49,7 @@ echo "<tr style='background:#f0f0f0; text-align:center;'>
 for ($i = 0; $i < count($beli); $i++) {
     echo "<tr align='center'>
             <td>" . ($i + 1) . "</td>
+            <td>" . $kode[$i] . "</td>
             <td>" . $beli[$i] . "</td>
             <td>" . $jumlah[$i] . "</td>
             <td>Rp " . number_format($total[$i], 0, ',', '.') . "</td>
@@ -52,15 +57,13 @@ for ($i = 0; $i < count($beli); $i++) {
 }
 
 // Garis pemisah
-echo "<tr><td colspan='4'><hr></td></tr>";
+echo "<tr><td colspan='5'><hr></td></tr>";
 
 // Baris grand total
 echo "<tr style='background:#e0e0e0; font-weight:bold;'>
-        <td colspan='3' align='right'>Grand Total</td>
+        <td colspan='4' align='right'>Grand Total</td>
         <td>Rp " . number_format($grandtotal, 0, ',', '.') . "</td>
       </tr>";
 
 echo "</table>";
-
-
 ?>
