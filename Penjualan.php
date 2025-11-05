@@ -1,40 +1,53 @@
 <?php
-// Commit 4 – Output Akhir (Versi Benar & Rapi + Kode Barang)
+// Commit 5 – Versi dengan Diskon (Tanpa Total Bayar)
 
 // Array data barang
 $kode_barang = ["BRG001", "BRG002", "BRG003", "BRG004", "BRG005"];
 $nama_barang = ["Leptop", "Printer", "Keyboard", "Mouse", "Flasdisk"];
 $harga_barang = [15000, 10000, 12000, 20000, 25000];
 
-// Array untuk data pembelian
-$kode = [];       // Menyimpan kode barang dibeli
-$beli = [];       // Menyimpan nama barang dibeli
-$jumlah = [];     // Menyimpan jumlah barang yang dibeli
-$total = [];      // Menyimpan total harga per barang
-$grandtotal = 0;  // Menyimpan total semua pembelian
 
-// Perulangan untuk proses pembelian acak sebanyak 5 produk
+
+
+// Array untuk data pembelian
+$kode = [];
+$beli = [];
+$jumlah = [];
+$total = [];
+$grandtotal = 0;
+
+
+
+// Proses pembelian acak sebanyak 5 produk
 for ($i = 0; $i < 5; $i++) {
-    $index = rand(0, count($nama_barang) - 1); // Pilih barang acak
+    $index = rand(0, count($nama_barang) - 1);
     $kode[$i] = $kode_barang[$index];
     $beli[$i] = $nama_barang[$index];
-    $jumlah[$i] = rand(1, 5); // Jumlah acak 1–5
+    $jumlah[$i] = rand(1, 5);
     $total[$i] = $harga_barang[$index] * $jumlah[$i];
     $grandtotal += $total[$i];
 }
 
 // ===============================
-// PERHITUNGAN TOTAL TAMBAHAN
+// PERHITUNGAN DISKON
 // ===============================
-$rata_rata = $grandtotal / count($total);
-$max_total = max($total);
-$min_total = min($total);
+if ($grandtotal <= 50000) {
+    $diskon_persen = 5;
+} elseif ($grandtotal > 50000 && $grandtotal <= 100000) {
+    $diskon_persen = 10;
+} else {
+    $diskon_persen = 20;
+}
+
+$diskon_rp = ($diskon_persen / 100) * $grandtotal;
 
 // ===============================
-// OUTPUT DALAM BENTUK TABEL
+// OUTPUT TABEL
 // ===============================
 echo "<h2 style='text-align:center;'>POLGAN MART🛒</h2>";
 echo "<table border='1' cellpadding='8' cellspacing='0' width='80%' align='center' style='border-collapse:collapse;'>";
+
+
 
 // Header tabel
 echo "<tr style='background:#f0f0f0; text-align:center;'>
@@ -44,6 +57,8 @@ echo "<tr style='background:#f0f0f0; text-align:center;'>
         <th>Jumlah</th>
         <th>Total Harga</th>
       </tr>";
+
+
 
 // Isi tabel
 for ($i = 0; $i < count($beli); $i++) {
@@ -56,13 +71,20 @@ for ($i = 0; $i < count($beli); $i++) {
           </tr>";
 }
 
-// Garis pemisah
-echo "<tr><td colspan='5'><hr></td></tr>";
 
-// Baris grand total
+
+// Grand total
 echo "<tr style='background:#e0e0e0; font-weight:bold;'>
         <td colspan='4' align='right'>Grand Total</td>
         <td>Rp " . number_format($grandtotal, 0, ',', '.') . "</td>
+      </tr>";
+
+
+
+// Diskon
+echo "<tr style='background:#f9f9f9; font-weight:bold;'>
+        <td colspan='4' align='right'>Diskon ({$diskon_persen}%)</td>
+        <td>- Rp " . number_format($diskon_rp, 0, ',', '.') . "</td>
       </tr>";
 
 echo "</table>";
