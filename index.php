@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         h2 {
-            color: #1e40af;
+            color: #f4c;
             margin-bottom: 20px;
         }
 
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         input[type="text"]:focus,
         input[type="password"]:focus {
             outline: none;
-            border-color: #1e40af;
+            border-color: #f4c;
             background-color: #eef3ff;
         }
 
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         button[type="submit"] {
-            background-color: #1e40af;
+            background-color: #f4c;
             color: white;
         }
 
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         button[type="submit"]:hover {
-            background-color: #1d4ed8;
+            background-color: #f4c;
         }
 
         button[type="reset"]:hover {
